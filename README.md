@@ -10,7 +10,7 @@ A private, offline personal-development tracker. Log daily effort across a few f
 
 ## Use it
 
-Open the published site, or download `index.html` and double-click it. Both work offline.
+Open [the published site](https://somto-chukwuchebe.github.io/numbered/), or download `index.html` and double-click it. Both work offline.
 
 First open walks you through a short setup: name the challenge, set the dates, define 1–5 focus areas and your daily habits. All of it is editable later in Settings.
 
@@ -35,7 +35,7 @@ So export a backup from **Settings → Export backup (JSON)** regularly, and use
 
 The published site is the repository root — `index.html`, `sw.js`, `manifest.json`, `icon.svg`. There is no build step on the server, so any static host works.
 
-**GitHub Pages:** Settings → Pages → Source: *Deploy from a branch* → `main` / `/ (root)`. Live in a minute or two at `https://<user>.github.io/<repo>/`.
+**GitHub Pages:** Settings → Pages → Source: *Deploy from a branch* → `main` / `/ (root)`. Live in a minute or two at `https://somto-chukwuchebe.github.io/numbered/`.
 
 **Netlify / Cloudflare Pages / Vercel:** connect this repository, leave the build command empty, set the publish directory to `/`. All three deploy from the repo, so moving host later is a five-minute job and the repo stays the source of truth.
 
