@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "^1.63.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.4"
+  },
+  "name": "numbered",
+  "version": "2.1.0",
+  "description": "Numbered \u2014 a private, offline personal-development challenge tracker",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test/run.mjs"
+  },
+  "private": true
+}

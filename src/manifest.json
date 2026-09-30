@@ -1,0 +1,15 @@
+{
+  "name": "Numbered",
+  "short_name": "Numbered",
+  "description": "Teach us to number our days. Track daily effort across your focus areas and habits through a time-bound challenge.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#eef2f8",
+  "theme_color": "#0e2444",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
