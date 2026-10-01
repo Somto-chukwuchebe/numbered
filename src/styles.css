@@ -203,7 +203,12 @@ html[data-theme='dark'] .topbar { border-bottom: 1px solid var(--line); }
   border-radius: var(--r-lg); box-shadow: var(--shadow-card); padding: var(--sp-4);
 }
 .card--flush { padding: 0; overflow: hidden; }
-.card__head { display: flex; align-items: flex-start; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+.card__head {
+  display: flex; align-items: flex-start; gap: var(--sp-3);
+  margin-bottom: var(--sp-3); flex-wrap: wrap;
+}
+/* Let the actions drop below the title rather than squeezing it to three lines. */
+.card__head > .grow { min-width: min(100%, 16rem); }
 .card__title { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
 .card__sub { font-size: 0.8rem; color: var(--text-3); margin-top: 3px; font-family: var(--sans); }
 
@@ -260,7 +265,8 @@ html[data-theme='dark'] .card--hero {
   background: var(--card); color: var(--text-1);
   min-height: var(--tap); padding: 0 var(--sp-4);
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
-  cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+  cursor: pointer; touch-action: manipulation;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
 }
 .btn:hover { background: var(--card-2); }
 .btn:active { transform: translateY(1px); }
@@ -286,7 +292,8 @@ html[data-theme='dark'] .btn--navy { background: #2c4d80; border-color: #2c4d80;
   background: var(--card-2); color: var(--text-2);
   border: 1px solid var(--line-strong); border-radius: var(--r-pill);
   min-height: 40px; padding: 0 14px;
-  display: inline-flex; align-items: center; gap: 7px; transition: background 0.14s ease, color 0.14s ease;
+  display: inline-flex; align-items: center; gap: 7px; touch-action: manipulation;
+  transition: background 0.14s ease, color 0.14s ease;
 }
 .chip:hover { color: var(--text-1); }
 .chip[disabled] { opacity: 0.45; cursor: not-allowed; }
@@ -322,12 +329,34 @@ html[data-theme='dark'] .btn--navy { background: #2c4d80; border-color: #2c4d80;
 
 .field { display: flex; flex-direction: column; gap: 6px; }
 input[type='text'], input[type='number'], input[type='date'], textarea, select {
-  font: inherit; font-size: 0.95rem; color: var(--text-1);
+  /* iOS zooms the viewport when a focused field is under 16px. */
+  font: inherit; font-size: max(16px, 0.95rem); color: var(--text-1);
   background: var(--card-2); border: 1px solid var(--line-strong);
   border-radius: var(--r-md); padding: 10px var(--sp-3); min-height: var(--tap); width: 100%;
 }
 textarea { min-height: 88px; resize: vertical; line-height: 1.55; }
 input::placeholder, textarea::placeholder { color: var(--text-3); }
+
+/* iOS Safari renders date inputs natively: they shrink-wrap to an intrinsic
+   width far wider than other engines, ignore width:100% in flex/grid, and
+   centre their value. Reset the native chrome and lay the value out ourselves. */
+input[type='date'] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.25;
+}
+input[type='date']::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+  min-height: 1.25em;
+}
+input[type='date']::-webkit-datetime-edit { padding: 0; }
+input[type='date']::-webkit-calendar-picker-indicator { opacity: 0.55; }
+
 input:disabled { background: var(--sunken); color: var(--text-3); }
 
 /* ---------------- entries ---------------- */
@@ -367,7 +396,7 @@ input:disabled { background: var(--sunken); color: var(--text-3); }
 .habit-name { font-size: 0.86rem; font-weight: 500; }
 
 .hbox {
-  appearance: none; cursor: pointer; width: 40px; height: 40px;
+  appearance: none; cursor: pointer; touch-action: manipulation; width: 40px; height: 40px;
   border-radius: var(--r-md); border: 1.5px solid var(--line-strong);
   background: var(--card-2); color: var(--text-3);
   font: inherit; font-size: 1rem;
@@ -379,7 +408,7 @@ input:disabled { background: var(--sunken); color: var(--text-3); }
 .hbox[aria-pressed='true'] { background: var(--accent-mark); border-color: transparent; color: #1f1705; }
 
 .htile {
-  appearance: none; cursor: pointer; font: inherit;
+  appearance: none; cursor: pointer; touch-action: manipulation; font: inherit;
   display: flex; align-items: center; gap: 9px; text-align: left;
   background: var(--card-2); color: var(--text-2);
   border: 1px solid var(--line-strong); border-radius: var(--r-md);

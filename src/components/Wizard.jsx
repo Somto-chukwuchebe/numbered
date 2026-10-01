@@ -11,7 +11,6 @@ export default function Wizard() {
   const [step, setStep] = useState(0);
   const cfg = state.config;
 
-  const canNext = step !== 0 || cfg.name.trim().length > 0;
   const last = step === STEPS.length - 1;
 
   return (
@@ -53,6 +52,7 @@ export default function Wizard() {
                 value={cfg.name}
                 onChange={(name) => actions.updateConfig({ name })}
                 placeholder="e.g. My 90-Day Challenge"
+                hint={cfg.name.trim() ? undefined : 'Leave this blank and it will be called “My Challenge” — you can rename it any time.'}
                 maxLength={120}
               />
               <TextArea
@@ -112,8 +112,12 @@ export default function Wizard() {
             <button
               type="button"
               className="btn btn--primary"
-              disabled={!canNext}
-              onClick={() => (last ? actions.completeSetup() : setStep((s) => s + 1))}
+              onClick={() => {
+                // A blank name must never block you: fall back rather than dead-end.
+                if (step === 0 && !cfg.name.trim()) actions.updateConfig({ name: 'My Challenge' });
+                if (last) actions.completeSetup();
+                else setStep((s) => s + 1);
+              }}
             >
               {last ? 'Start challenge' : 'Continue'}
             </button>

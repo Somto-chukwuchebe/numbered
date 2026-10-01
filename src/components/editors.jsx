@@ -29,7 +29,7 @@ export function PeriodEditor({ config, onChange, isDark }) {
 
   return (
     <div className="stack stack--tight">
-      <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-3)' }}>
+      <div className="grid" style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'var(--sp-3)' }}>
         <Field label="Start date" htmlFor={startId}>
           <input id={startId} type="date" value={config.startDate} onChange={(e) => setStart(e.target.value)} />
         </Field>
@@ -124,7 +124,7 @@ export function CategoryEditor({ categories, onChange }) {
               onChange={(e) => update(c.id, { name: e.target.value })}
             />
           </div>
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 'var(--sp-2)' }}>
+          <div className="grid" style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'var(--sp-2)' }}>
             <Field label="Daily goal (min)">
               <input
                 type="number"

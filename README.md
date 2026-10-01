@@ -51,6 +51,7 @@ The published site is the repository root — `index.html`, `sw.js`, `manifest.j
 npm install
 npm run build    # bundles src/ into index.html
 npm test         # 37 checks in headless Chromium
+node test/ios.mjs  # 10 more under an iPhone viewport and touch profile
 ```
 
 `build.mjs` inlines React, Recharts, every stylesheet and the icon into a single `index.html` — which is why it runs with no network at all. Commit the rebuilt `index.html` along with your source changes; that file *is* the deployment.
